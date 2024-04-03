@@ -4,16 +4,22 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {ThemeConfig} from "./config/theme.config";
+import {DevSupport} from "@react-buddy/ide-toolbox";
+import {ComponentPreviews, useInitial} from "./dev";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+    document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-      <ThemeConfig>
-            <App />
-      </ThemeConfig>
-  </React.StrictMode>
+    <React.StrictMode>
+        <ThemeConfig>
+            <DevSupport ComponentPreviews={ComponentPreviews}
+                        useInitialHook={useInitial}
+            >
+                <App/>
+            </DevSupport>
+        </ThemeConfig>
+    </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
