@@ -1,19 +1,15 @@
 import './App.css';
 import React from "react";
-import { Container, Button } from '@mui/material';
+import {BrowserRouter} from "react-router-dom";
+import {AppRouter} from "./Router";
 import {NavBar} from "./shared/NavBar";
-
-
-
 
 function App () {
   return (
-      <div>
-          <NavBar/>
-          <Container sx={{mt: 9}} maxWidth="xl">
-          <Button variant="contained">Hola Mundo</Button>
-      </Container>
-      </div>
+     <BrowserRouter>
+         <NavBar/>
+        <AppRouter />
+         </BrowserRouter>
   );
 }
 export default App;

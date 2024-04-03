@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import {AppBar, Box, Button, Container, Grid, Toolbar, Typography} from "@mui/material";
+import {AppBar, Box, Button, Container, Grid, Stack, Toolbar, Typography} from "@mui/material";
 
 
 export const NavBar: FC<{}> = () => {
@@ -17,8 +17,10 @@ export const NavBar: FC<{}> = () => {
                         <Typography >Tienda de Mascotas</Typography>
                         </Grid>
                         <Grid item>
-                          <Button variant= "outlined" >Login</Button>
-                            <Button variant= "outlined" >Register</Button>
+                            <Stack direction={"row"} spacing={2} >
+                                <Button variant= "contained" >Login</Button>
+                                <Button variant= "outlined" >Register</Button>
+                            </Stack>
                         </Grid>
                         </Grid>
                     </Container>
