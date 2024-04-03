@@ -21,11 +21,11 @@ const theme = createTheme({
         },
         primary: {
             main: themePalette.Lime,
-
         },
     },
     typography: {
         fontFamily: themePalette.Font_Global,
+
     },
     components: {
         MuiButton: {
