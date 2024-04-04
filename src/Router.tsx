@@ -10,8 +10,8 @@ return (
     <Routes>
         <Route path= "/" element={<RouterLayout/>}>
             <Route path= "/" element={<HomePage/>}/>
-            <Route path= "/login" element={<LoginPage/>}/>
         </Route>
+        <Route path= "/login" element={<LoginPage/>}/>
 {/*si quiero hacer una rota diferente que no se comparta la realizo debajo de cerrar route RouterLayout comparte la ruta de login y home*/}
 
         </Routes>)
