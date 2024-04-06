@@ -37,7 +37,7 @@ export const LoginPage: React.FC <{}> = () => {
            >
                 <Grid item>
                   <Paper sx={{padding: "1.2em", borderRadius: "0.5em" }}>
-                      <Typography variant="h4" align="center" sx={{mt:1, mb:1}}>Iniciar sesión</Typography>
+                      <Typography variant="h4" align="center" sx={{mt:1, mb:1}}>Iniciar sesiónn</Typography>
                     <Box component="form" onSubmit={handleSubmit}>
                             <TextField
                                 name="username"
