@@ -10,6 +10,9 @@ export enum themePalette {
    background = "#12181b",
    Lime = "#C8FA5F",
     Font_Global = "'Roboto', sans-serif",
+   //Alerts Style
+    ERROR_MAIN = "#920c0c",
+    BG_ERROR_MAIN = "rgba(244, 67, 54, 0.1)",
 
 }
 const theme = createTheme({
@@ -38,6 +41,21 @@ const theme = createTheme({
                }
         },
     },
+        MuiAlert: {
+            defaultProps: {
+                style: {
+                    borderRadius: "0.8rem",
+                    fontSize: "1rem",
+                }
+            },
+            styleOverrides: {
+                standardError: {
+                    backgroundColor: themePalette.BG_ERROR_MAIN,
+                    border: `1px solid ${themePalette.ERROR_MAIN}`,
+                },
+            }
+        },
+
     }
 });
 
