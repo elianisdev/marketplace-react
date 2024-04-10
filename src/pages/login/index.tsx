@@ -1,5 +1,7 @@
 import React, {useState} from "react";
 import {Box, Container, Grid, Paper, Typography, TextField, Button} from "@mui/material";
+import {useNotification} from "../../context/notification.context";
+import {LoginValidate} from "../../utils/validateForm";
 
 
 type LoginType = {
@@ -8,6 +10,7 @@ type LoginType = {
 }
 
 export const LoginPage: React.FC <{}> = () => {
+    const { getError, getSuccess } = useNotification();
     const [LoginData, setLoginData] = useState<LoginType>({
         username: "",
         password: ""
@@ -21,10 +24,13 @@ export const LoginPage: React.FC <{}> = () => {
     }
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(LoginData);
+        LoginValidate.validate(LoginData).then(() => {
+            getSuccess(JSON.stringify(LoginData))
+            }
+        ).catch((error) => {
+            getError(error.message)
+        })
     }
-
-
 
     return (
         <Container maxWidth="sm">
@@ -46,7 +52,6 @@ export const LoginPage: React.FC <{}> = () => {
                                 fullWidth
                                 label="Email"
                                 sx={{mt:2, mb:1.5}}
-                                required
                                 onChange={dataLogin}
                             />
                             <TextField
@@ -56,7 +61,6 @@ export const LoginPage: React.FC <{}> = () => {
                                 fullWidth
                                 label="Password"
                                 sx={{mt:1.5, mb:1.5}}
-                                required
                                 onChange={dataLogin}
                             />
                         <Button fullWidth type="submit" variant="contained" sx={{mt:1.5, mb:3}}>Iniciar Sesion</Button>
@@ -66,5 +70,4 @@ export const LoginPage: React.FC <{}> = () => {
            </Grid>
         </Container>
     )
-
-};
+}
