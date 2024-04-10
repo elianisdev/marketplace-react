@@ -4,6 +4,7 @@ import {AlertColor} from "@mui/material";
 
 type ContextProps = {
     getError: (msg:string) => void;
+    getSuccess: (msg:string) => void;
 }
 const NotificationContext = React.createContext<ContextProps | null >(null);
 
@@ -21,11 +22,16 @@ export const NotificationProvider: React.FC<{ children: JSX.Element }> = ({
         setSeverity("error")
         setOpen(true)
         setMsg(msg)
-
+    };
+    const getSuccess = (msg: string) => {
+        setSeverity("success")
+        setOpen(true)
+        setMsg(msg)
     };
 
     const value = {
-        getError
+        getError,
+        getSuccess,
     }
     return (
       <NotificationContext.Provider value={value}>

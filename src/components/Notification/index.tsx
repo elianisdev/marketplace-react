@@ -9,7 +9,7 @@ type AlertNotify = {
 }
 
 export const Notification: React.FC<AlertNotify> = ({
-       open,
+        open,
         msg,
         handleClose,
         severity
