@@ -36,7 +36,7 @@ export const HomePage: React.FC <{}> = () => {
                                 </Grid>))
                             }
                         </Grid>
-                    ) : "No se recibio informacion de la API"
+                    ) : "No se recibio información de la API"
                 }
             </div>
         </Container>
