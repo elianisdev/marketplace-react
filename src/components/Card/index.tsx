@@ -10,7 +10,7 @@ type CardProps = {
 
 export const CardComponent: React.FC<CardProps> = ({image, name, status, species}) => {
 return (
-    <Card sx={{maxWidth: 345}}>
+    <Card>
     <CardMedia
     component="img"
     height="194"
@@ -19,14 +19,14 @@ return (
     />
         <CardContent>
             <Typography sx={{mb: 1.5}} variant="h4">
-                nombre: {name}
+                Name: {name}
             </Typography>
             <Divider/>
             <Typography sx={{mt: 1.5}}>
-                Especie: {species}
+                Specie: {species}
             </Typography>
             <Typography sx={{mt: 1.5}}>
-                estado: {status}
+                State: {status}
             </Typography>
 
         </CardContent>
