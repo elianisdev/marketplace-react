@@ -1,4 +1,4 @@
-import React, {useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import {Box, Button, Container, Grid} from "@mui/material";
 import {CardComponent, HeaderComponent} from "../../components";
 import {characters} from "../../api/characters";
@@ -6,13 +6,23 @@ import {TypeCharacter} from "./interface/character.interface";
 
 export const HomePage: React.FC <{}> = () => {
 
-    const [allCharacters, setAllCharacters] = React.useState<TypeCharacter[] | null>(null)
-    useEffect(()=> {
-        characters.getAll({page: 1 }).then((r) => {
-           setAllCharacters(r.data.result);
-        }).catch((e) => {
+    const [allCharacters, setAllCharacters] = useState<TypeCharacter[]>([]);
+
+    const getCharacters = async () => {
+
+        try {
+            const allCharacters = await characters.getAll({page: 1 });
+            if (!allCharacters.data.results) {
+                throw new Error("No se recibio información de la API");
+            }
+            setAllCharacters(allCharacters.data.results);
+        } catch (e) {
             console.error(e);
-        })
+        }
+    }
+
+    useEffect(()=> {
+        getCharacters();
     },[]);
 
     return (
@@ -28,7 +38,7 @@ export const HomePage: React.FC <{}> = () => {
             />
             <div>
                 {
-                    allCharacters?.length !==0 ? (
+                    allCharacters!.length ? (
                         <Grid container spacing={2} direction="row">
                             {allCharacters!.map((character)=> (
                                 <Grid item xs={3}>
@@ -36,7 +46,7 @@ export const HomePage: React.FC <{}> = () => {
                                 </Grid>))
                             }
                         </Grid>
-                    ) : "No se recibio informacion de la API"
+                    ) : "No se recibio información de la API"
                 }
             </div>
         </Container>
