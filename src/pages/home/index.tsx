@@ -1,29 +1,39 @@
 import React, {useEffect, useState} from "react";
-import {Box, Button, Container, Grid} from "@mui/material";
+import {Box, Button, CircularProgress, Container, Grid, Pagination, Stack} from "@mui/material";
 import {CardComponent, HeaderComponent} from "../../components";
 import {characters} from "../../api/characters";
 import {TypeCharacter} from "./interface/character.interface";
 
 export const HomePage: React.FC <{}> = () => {
-
+    const [page, setPage] = useState<number>(1);
+    const [count, setCount] = useState(1)
     const [allCharacters, setAllCharacters] = useState<TypeCharacter[]>([]);
+    const [Loading, setLoading] = useState<boolean>(true);
 
     const getCharacters = async () => {
 
         try {
-            const allCharacters = await characters.getAll({page: 1 });
+            const allCharacters = await characters.getAll({page});
             if (!allCharacters.data.results) {
                 throw new Error("No se recibio información de la API");
             }
+            setCount(allCharacters.data.info.pages)
             setAllCharacters(allCharacters.data.results);
+            setTimeout(() => {setLoading(false)}, 1000);
         } catch (e) {
             console.error(e);
         }
     }
 
     useEffect(()=> {
+        setLoading(true)
         getCharacters();
-    },[]);
+    }, [page]);
+
+    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        setPage(value);
+
+    };
 
     return (
         <Container maxWidth="xl">
@@ -31,24 +41,46 @@ export const HomePage: React.FC <{}> = () => {
                 title="Hola mundo"
                 description="Hola mundo bienvenido"
                 element={
-                <Button fullWidth variant="contained">
-                    Estamos en Home
-                </Button>
-            }
-            />
-            <div>
-                {
-                    allCharacters!.length ? (
-                        <Grid container spacing={2} direction="row">
-                            {allCharacters!.map((character)=> (
-                                <Grid item xs={3}>
-                                    <CardComponent key={character.id} image={character.image} name={character.name} species={character.species} status={character.status}  />
-                                </Grid>))
-                            }
-                        </Grid>
-                    ) : "No se recibio información de la API"
+                    <Button fullWidth variant="contained">
+                        Estamos en Home
+                    </Button>
                 }
-            </div>
-        </Container>
+            />
+            {Loading ? (
+                <Box sx={{display: "flex", justifyContent: "center", mt: 4}}>
+                <CircularProgress />
+                </Box>
+                ) : (
+                <>
+                    <div>
+                        {
+                            allCharacters!.length ? (
+                                <Grid sx={{my: 2}} container spacing={2} direction="row">
+                                    {allCharacters!.map((character) => (
+                                        <Grid item xs={3}>
+                                            <CardComponent key={character.id} image={character.image}
+                                                           name={character.name} species={character.species}
+                                                           status={character.status}
+                                            />
+                                        </Grid>))}
+                                </Grid>
+                            ) : ("No se recibio información de la API"
+                            )}
+                    </div>
+                    <Box sx={{ width: "100%", display:"flex", justifyContent:"center" }}>
+                        <Pagination
+                            variant="outlined"
+                            count={count} page={page}
+                            onChange={handleChange}
+                            sx={{mb:3}}
+                            size="large" />
+                    </Box>
+
+                </>
+
+
     )
+}
+</Container>
+)
 };
