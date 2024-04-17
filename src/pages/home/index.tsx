@@ -13,26 +13,25 @@ export const HomePage: React.FC <{}> = () => {
     const getCharacters = async () => {
 
         try {
+            setLoading(true)
             const allCharacters = await characters.getAll({page});
             if (!allCharacters.data.results) {
                 throw new Error("No se recibio información de la API");
             }
             setCount(allCharacters.data.info.pages)
             setAllCharacters(allCharacters.data.results);
-            setTimeout(() => {setLoading(false)}, 1000);
+             setLoading(false);
         } catch (e) {
             console.error(e);
         }
     }
 
     useEffect(()=> {
-        setLoading(true)
         getCharacters();
     }, [page]);
 
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value);
-
     };
 
     return (
