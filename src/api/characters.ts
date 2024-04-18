@@ -9,7 +9,7 @@ export const characters = {
            }
        });
    },
-    getById: function ({ id }:{id:number}){
+    getById: function ({ id }:{id:string | undefined }){
         return axiosInstance.get(`${endpoint}/${id}` );
     }
 }
