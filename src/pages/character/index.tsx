@@ -10,17 +10,29 @@ export const CharacterPage : React.FC  = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [character , setCharacter] = useState< ICharacter | null >(null);
 
-
-
     React.useEffect(() => {
-        characters
-            .getById({id})
-            . then((r)=> {
-                setCharacter(r.data)
-            setLoading(false)
-            })
-            .catch((e)=> console.error(e))
+        const fetchCharacter = async () => {
+            try {
+                const response = await characters.getById({id});
+                setCharacter(response.data);
+                setLoading(false);
+            } catch (e) {
+                console.error(e);
+            }
+        };
+        fetchCharacter();
+
     }, []);
+
+    //React.useEffect(() => {
+       // characters
+           // .getById({id})
+            //. then((r)=> {
+              //  setCharacter(r.data)
+           // setLoading(false)
+           // })
+            //.catch((e)=> console.error(e))
+   // }, []);
     return (
         <Box sx={{width: "100"}}>
         <Container maxWidth="xl">
