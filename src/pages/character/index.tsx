@@ -58,13 +58,10 @@ export const CharacterPage : React.FC  = () => {
                                     variant="outlined"
                                 />
                             </Box>
-
-
                         </Grid>
                         <Grid item xs={6}>
                             <img src={character!.image} style={{width:"100%", borderRadius:"0.5em"}} alt={character?.name} />
                         </Grid>
-
                     </Grid>
                 )}
         </Container>

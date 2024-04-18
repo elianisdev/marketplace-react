@@ -60,6 +60,7 @@ export const HomePage: React.FC <{}> = () => {
                                             <CardComponent key={character.id} image={character.image}
                                                            name={character.name} species={character.species}
                                                            status={character.status}
+                                                           id={character.id}
                                             />
                                         </Grid>))}
                                 </Grid>
