@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {characters} from "../../api/characters";
 import {ICharacter} from "./interface/character.interface";
@@ -10,19 +10,20 @@ export const CharacterPage : React.FC  = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [character , setCharacter] = useState< ICharacter | null >(null);
 
-    React.useEffect(() => {
-        const fetchCharacter = async () => {
-            try {
-                const response = await characters.getById({id});
-                setCharacter(response.data);
-                setLoading(false);
-            } catch (e) {
-                console.error(e);
-            }
-        };
-        fetchCharacter();
+    const ParamsCharacter = async () => {
+        try {
+            setLoading(true);
+            const response = await characters.getById({id});
+            setCharacter(response.data);
+            setLoading(false);
+        } catch (e) {
+            console.error(e);
+        }
 
-    }, []);
+    }
+    useEffect(() => {
+        ParamsCharacter();
+    }, [id]);
 
     //React.useEffect(() => {
        // characters
