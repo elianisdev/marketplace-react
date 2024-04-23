@@ -14,6 +14,9 @@ export const CharacterPage : React.FC  = () => {
         try {
             setLoading(true);
             const response = await characters.getById({id});
+            if (!response.data) {
+                throw new Error("No se recibio ningun parametro de la ruta");
+            }
             setCharacter(response.data);
             setLoading(false);
         } catch (e) {
