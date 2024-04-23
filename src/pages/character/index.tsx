@@ -15,7 +15,7 @@ export const CharacterPage : React.FC  = () => {
             setLoading(true);
             const response = await characters.getById({id});
             if (!response.data) {
-                throw new Error("No se recibio ningun parametro de la ruta");
+                throw new Error("No se recibió ningún parameter de la ruta");
             }
             setCharacter(response.data);
             setLoading(false);
@@ -47,7 +47,7 @@ export const CharacterPage : React.FC  = () => {
                 </Box> : (
                     <Grid sx={{mt:2}} container columnSpacing={2}>
                         <Grid item xs={6}>
-                           <Typography variant= "h2">
+                           <Typography variant= "h3">
                                  Nombre: {character!.name}
                            </Typography>
                             <Divider sx={{mb:2}}/>
@@ -62,21 +62,15 @@ export const CharacterPage : React.FC  = () => {
                             </Typography>
                             <Box sx={{mt: 2}}>
                                 <Chip
-                                    label={character!.status}
+                                    label={character!.status === "Alive" ? "Vivo" : "Muerto"}
                                     clickable
-                                    color="primary"
-                                    variant="outlined"
-                                />
-                                <Chip
-                                    label={character!.status}
-                                    clickable
-                                    color="secondary"
+                                    color={character!.status === "Alive" ? "primary" : "secondary"}
                                     variant="outlined"
                                 />
                             </Box>
                         </Grid>
                         <Grid item xs={6}>
-                            <img src={character!.image} style={{width:"100%", borderRadius:"0.5em"}} alt={character?.name} />
+                            <img src={character!.image} style={{width:"75%", borderRadius:"0.5em"}} alt={character?.name} />
                         </Grid>
                     </Grid>
                 )}
