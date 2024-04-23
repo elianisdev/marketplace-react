@@ -62,7 +62,7 @@ export const CharacterPage : React.FC  = () => {
                             </Typography>
                             <Box sx={{mt: 2}}>
                                 <Chip
-                                    label={character!.status === "Alive" ? "Vivo" : "Muerto"}
+                                    label={character!.status === "Alive" ? "Alive" : "Dead"}
                                     clickable
                                     color={character!.status === "Alive" ? "primary" : "secondary"}
                                     variant="outlined"
