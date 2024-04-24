@@ -6,19 +6,24 @@ import reportWebVitals from './reportWebVitals';
 import {ThemeConfig} from "./config/theme.config";
 import {DevSupport} from "@react-buddy/ide-toolbox";
 import {ComponentPreviews, useInitial} from "./dev";
+import {Provider} from "react-redux";
+import {store} from "./redux/store";
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(
     <React.StrictMode>
-        <ThemeConfig>
-            <DevSupport ComponentPreviews={ComponentPreviews}
-                        useInitialHook={useInitial}
-            >
-                <App/>
-            </DevSupport>
-        </ThemeConfig>
+        <Provider store={store}>
+            <ThemeConfig>
+                <DevSupport ComponentPreviews={ComponentPreviews}
+                            useInitialHook={useInitial}
+                >
+                    <App/>
+                </DevSupport>
+            </ThemeConfig>
+        </Provider>
+        
     </React.StrictMode>
 );
 
