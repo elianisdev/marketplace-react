@@ -3,7 +3,7 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 // Define a type for the slice state
 interface CartAddState {
-    id: string | number,
+    id: number,
     name: string,
     info: string,
     image: string,
@@ -21,17 +21,22 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart: (state, action: PayloadAction<CartAddState>) => {
-            const { id } = action.payload
-        if (
-            state.length === 0 ||
-            state.filter((item) => item.id === id).length === 0
-        ) {
-            state.push(action.payload)
-        }
+            const {id} = action.payload
+            if (
+                state.length === 0 ||
+                state.filter((item) => item.id === id).length === 0
+            ) {
+                state.push(action.payload)
+            }
         },
         removeToCart: (state, action: PayloadAction<CartRemoveState>) => {
-
-        }
+            const {id} = action.payload
+            if (
+                state.some((item) => item.id === id))
+            {
+                return state = state.filter((item) => item.id !== id)
+            }
+        },
     },
 })
 
