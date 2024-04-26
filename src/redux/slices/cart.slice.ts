@@ -1,18 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
+// Define a type for the slice state
 interface CartState {
-    value: number
+    id: string | number,
+    name: string,
+    info: string,
+    image: string,
 }
 
-// Define the initial state using that type
-const initialState: CartState = {
-    value: 0,
-}
+// Aca coloco los valores se va a trabajar como un array de objetos y en este caso se deja vacio
+const initialState: CartState[] = []
 
 export const cartSlice = createSlice({
-    name: 'counter',
-    // `createSlice` will infer the state type from the `initialState` argument
+    name: 'cart',
     initialState,
     reducers: {
         addToCart: (state, action: PayloadAction<CartState>) => {

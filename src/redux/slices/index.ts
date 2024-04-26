@@ -1,1 +1,1 @@
-export { counterSlice} from "./cart.slice";
+export { cartSlice } from "./cart.slice";
