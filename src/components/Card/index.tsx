@@ -17,8 +17,8 @@ export const CardComponent: React.FC<CardProps> = ({
       name,
       status,
       species,
-        id
-}) => {
+       id
+}: CardProps) => {
     const [disabledBtn, setDisabledBtn] = useState<boolean>(false)
     let navigate = useNavigate()
     const dispatch = useAppDispatch()
@@ -34,9 +34,7 @@ export const CardComponent: React.FC<CardProps> = ({
             name,
             info: status,
             image}))
-
     }
-
 return (
     <Card>
     <CardMedia
