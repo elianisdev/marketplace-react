@@ -37,7 +37,7 @@ export const CartComponent: React.FC<CartComponentProps> = ({
                 </Stack>
                 <Divider sx={{ my: 1.5 }} />
                 {items.length > 0 ?
-                    items.map(({id, image, name, info}: CardProps) => (
+                    items.map(({id, image, name, info}) => (
                         <HorizontalCardComponent
                             id={id}
                             image={image}
