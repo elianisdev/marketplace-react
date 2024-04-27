@@ -29,7 +29,6 @@ export const NavBar: FC<{}> = () => {
                         </Grid>
                         <Grid item>
                             <Stack direction={"row"} spacing={2} >
-                                <Button variant="contained" onClick={() => navigate("login")}>Login</Button>
                                 <IconButton
                                     color="primary"
                                     onClick={() => handleStateViewDrawer("String")}>

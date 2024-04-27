@@ -25,7 +25,7 @@ export const HorizontalCardComponent: React.FC<CardHorizntalComponentProps> = ({
             image,
             name,
              info,
-                                                                               }) => {
+       }) => {
     const dispach = useAppDispatch();
     const handleRemoveToCard = () => {
         dispach(
