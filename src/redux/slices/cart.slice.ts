@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
+import {getItem} from "../../utils/localStorage";
 
 // Define a type for the slice state
 interface CartAddState {
@@ -14,7 +15,7 @@ interface CartRemoveState {
 }
 
 // Aca coloco los valores se va a trabajar como un array de objetos y en este caso se deja vacio
-const initialState: CartAddState[] = []
+const initialState: CartAddState[] = getItem("cart") || []
 
 export const cartSlice = createSlice({
     name: 'cart',
