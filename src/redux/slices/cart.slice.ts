@@ -2,12 +2,11 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
 // Define a type for the slice state
-interface CartAddState {
+export interface CartAddState {
     id: number,
     name: string,
     info: string,
     image: string,
-
 }
 interface CartRemoveState {
   id: number,
