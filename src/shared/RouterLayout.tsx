@@ -1,12 +1,14 @@
 import React from "react";
 import {NavBar} from "./NavBar";
-import {Outlet} from "react-router-dom";
+import {Navigate, Outlet} from "react-router-dom";
+import {useAppSelector} from "../redux/hooks";
 
 export const RouterLayout: React.FC<{}> = () => {
+    const {isAuth} = useAppSelector(state => state.authReducer);
    return (
-       <>
-       <NavBar/>
-        <Outlet />
-       </>
+       isAuth ? <>
+           <NavBar/>
+           <Outlet />
+       </> : <Navigate to="/login" />
    )
 }

@@ -8,7 +8,7 @@ import { CartComponent } from './Cart';
 
 export const NavBar: FC<{}> = () => {
     const navigate = useNavigate();
-
+    const {isAuth} = useAppSelector(state => state.authReducer);
     const [open, setOpen] = React.useState<boolean>(false);
     const handleStateViewDrawer = (state: string) => {
         setOpen((state) => !state);
@@ -28,17 +28,22 @@ export const NavBar: FC<{}> = () => {
                         <Typography >Tienda Ricky Morty</Typography>
                         </Grid>
                         <Grid item>
-                            <Stack direction={"row"} spacing={2} >
-                                <IconButton
-                                    color="primary"
-                                    onClick={() => handleStateViewDrawer("String")}>
-                                    <Badge color="error" badgeContent={items.length} >
-                                        <ShoppingCartOutlinedIcon />
-                                    </Badge>
-                                </IconButton>
-                                <Button variant= "contained" onClick={() => navigate("Login")}>Login</Button>
-                                <Button variant= "outlined" >Register</Button>
-                            </Stack>
+                            {
+                                isAuth ?
+                                    <Button variant= "contained" >Logout</Button>
+                                    : <Stack direction="row" spacing={2}>
+                                        <IconButton
+                                            color="primary"
+                                            onClick={() => handleStateViewDrawer("String")}>
+                                            <Badge color="error" badgeContent={items.length} >
+                                                <ShoppingCartOutlinedIcon />
+                                            </Badge>
+                                        </IconButton>
+                                        <Button variant= "contained" onClick={() => navigate("Login")}>Login</Button>
+                                        <Button variant= "outlined" >Register</Button>
+                                    </Stack>
+                            }
+
                         </Grid>
                         </Grid>
                     </Container>
