@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 
 
 const initialState: {isAuth: boolean} = {
-    isAuth: true,
+    isAuth: false,
 };  // Initial state
 
 export const authSlice = createSlice({
@@ -17,4 +17,6 @@ export const authSlice = createSlice({
         },
     },
 
-}); // Create a slice
+}); // Create a
+
+export const {login, logout} = authSlice.actions;
