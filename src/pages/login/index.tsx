@@ -3,6 +3,9 @@ import {Box, Container, Grid, Paper, Typography, TextField, Button} from "@mui/m
 import {useNotification} from "../../context/notification.context";
 import {LoginValidate} from "../../utils/validateForm";
 import {useFormik} from "formik";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {login} from "../../redux/slices/auth.slice";
+import {useNavigate} from "react-router-dom";
 
 
 type LoginType = {
@@ -11,6 +14,8 @@ type LoginType = {
 }
 const LoginPage: React.FC <{}> = () => {
     const {getSuccess } = useNotification();
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch();
     const formik = useFormik<LoginType>({
         initialValues: {
         username: "",
@@ -18,6 +23,8 @@ const LoginPage: React.FC <{}> = () => {
         },
         validationSchema: LoginValidate,
         onSubmit: (values) => {
+            dispatch(login());
+            navigate("/");
             getSuccess(JSON.stringify(values));
         },
     });
