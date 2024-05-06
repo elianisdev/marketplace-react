@@ -5,7 +5,7 @@ import {LoginValidate} from "../../utils/validateForm";
 import {useFormik} from "formik";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {login} from "../../redux/slices/auth.slice";
-import {useNavigate} from "react-router-dom";
+import {Navigate, useNavigate} from "react-router-dom";
 
 
 type LoginType = {
@@ -13,7 +13,10 @@ type LoginType = {
     password: string;
 }
 const LoginPage: React.FC <{}> = () => {
+   //user: elianitasuanguz@gmail.com
+    //password: Elianis4
     const {getSuccess } = useNotification();
+    const {isAuth} = useAppSelector(state => state.authReducer);
     const navigate = useNavigate()
     const dispatch = useAppDispatch();
     const formik = useFormik<LoginType>({
@@ -29,7 +32,7 @@ const LoginPage: React.FC <{}> = () => {
         },
     });
 
-    return (
+    return isAuth ? <Navigate to="/" replace /> : (
         <Container maxWidth="sm">
            <Grid
                container
