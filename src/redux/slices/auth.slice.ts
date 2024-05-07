@@ -1,8 +1,29 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {authThunk} from "../thunks/auth.thunk";
+import {RejectedActionFromAsyncThunk} from "@reduxjs/toolkit/dist/matchers";
 
+interface AuthState {
+    isAuth: boolean;
+    success: boolean;
+    error: RejectedActionFromAsyncThunk<any> | null;
+    loading: boolean;
+    userData: {
+        email: string | null;
+        uid: string | null;
+    } | null;
+accessToken: string | null;
+isExpired: boolean | null;
+}
 
-const initialState: {isAuth: boolean} = {
+const initialState:AuthState = {
     isAuth: false,
+    success: false,
+    error: null,
+    loading: false,
+    userData: null,
+    accessToken: null,
+    isExpired: null
+
 };  // Initial state
 
 export const authSlice = createSlice({
@@ -16,6 +37,32 @@ export const authSlice = createSlice({
             state.isAuth = false;
         },
     },
+extraReducers: (builder) => {
+    builder.addCase(authThunk.pending, (state) => {
+    return (state = {
+        ...initialState,
+        loading: true
+    });
+    })
+    builder.addCase(authThunk.fulfilled, (state, action) => {
+        return (state = {
+            ...initialState,
+            loading: false,
+            success: true,
+            accessToken: action.payload.accessToken,
+            isAuth: true,
+            isExpired: false,
+            userData: action.payload.userData
+        });
+
+    });
+    builder.addCase(authThunk.rejected, (state, action) => {
+        return (state = {
+            ...initialState,
+            error: action.payload,
+        });
+    })
+    }
 
 }); // Create a
 
