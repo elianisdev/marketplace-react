@@ -6,6 +6,7 @@ import {useFormik} from "formik";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 import {login} from "../../redux/slices/auth.slice";
 import {Navigate, useNavigate} from "react-router-dom";
+import {authThunk} from "../../redux/thunks/auth.thunk";
 
 
 type LoginType = {
@@ -26,12 +27,11 @@ const LoginPage: React.FC <{}> = () => {
         },
         validationSchema: LoginValidate,
         onSubmit: (values) => {
-            dispatch(login());
+            dispatch(authThunk(values));
             navigate("/");
-            getSuccess(JSON.stringify(values));
+            //getSuccess(JSON.stringify(values));
         },
     });
-
     return isAuth ? <Navigate to="/" replace /> : (
         <Container maxWidth="sm">
            <Grid
