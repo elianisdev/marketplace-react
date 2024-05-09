@@ -1,10 +1,8 @@
 import React from "react";
 import {Box, Container, Grid, Paper, Typography, TextField, Button} from "@mui/material";
-import {useNotification} from "../../context/notification.context";
 import {LoginValidate} from "../../utils/validateForm";
 import {useFormik} from "formik";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
-import {login} from "../../redux/slices/auth.slice";
 import {Navigate, useNavigate} from "react-router-dom";
 import {authThunk} from "../../redux/thunks/auth.thunk";
 
@@ -14,9 +12,6 @@ type LoginType = {
     password: string;
 }
 const LoginPage: React.FC <{}> = () => {
-   //user: elianitasuanguz@gmail.com
-    //password: Elianis4
-    const {getSuccess } = useNotification();
     const {isAuth} = useAppSelector(state => state.authReducer);
     const navigate = useNavigate()
     const dispatch = useAppDispatch();
