@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Box, CardProps,
+    Box,
     Divider,
     Drawer,
     IconButton,
@@ -13,7 +13,7 @@ import {useAppSelector} from "../redux/hooks";
 
 interface CartComponentProps {
     open: boolean;
-    handleStateViewDrawer: (state: string) => void;
+    handleStateViewDrawer: () => void;
 }
 
 export const CartComponent: React.FC<CartComponentProps> = ({
@@ -31,7 +31,7 @@ export const CartComponent: React.FC<CartComponentProps> = ({
                     alignItems="center"
                 >
                     <Typography variant="h5">Cart</Typography>
-                    <IconButton color="primary" onClick={() => handleStateViewDrawer("cart")}>
+                    <IconButton color="primary" onClick={() => handleStateViewDrawer()}>
                         <CloseRoundedIcon />
                     </IconButton>
                 </Stack>
