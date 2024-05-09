@@ -17,8 +17,8 @@ export const NavBar: FC<{}> = () => {
     dispatch(logout())
         navigate("/login")
     }
-    const handleStateViewDrawer = (state: string) => {
-        setOpen((state) => !state);
+    const handleStateViewDrawer = () => {
+        setOpen((oldValue) => !oldValue);
     };
     const items = useAppSelector((state) => state.cartReducer);
     return (
@@ -39,18 +39,17 @@ export const NavBar: FC<{}> = () => {
                                 isAuth ?
                                     <Button variant= "contained" onClick={() => handleLogout()}>Logout</Button>
                                     : <Stack direction="row" spacing={2}>
-                                        <IconButton
-                                            color="primary"
-                                            onClick={() => handleStateViewDrawer("String")}>
-                                            <Badge color="error" badgeContent={items.length} >
-                                                <ShoppingCartOutlinedIcon />
-                                            </Badge>
-                                        </IconButton>
                                         <Button variant= "contained" onClick={() => navigate("Login")}>Login</Button>
                                         <Button variant= "outlined" >Register</Button>
                                     </Stack>
                             }
-
+                            <IconButton
+                                color="primary"
+                                onClick={() => handleStateViewDrawer()}>
+                                <Badge color="error" badgeContent={items.length} >
+                                    <ShoppingCartOutlinedIcon />
+                                </Badge>
+                            </IconButton>
                         </Grid>
                         </Grid>
                     </Container>

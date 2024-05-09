@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Box, Button, CircularProgress, Container, Grid, Pagination, Stack} from "@mui/material";
+import {Box, Button, CircularProgress, Container, Grid, Pagination} from "@mui/material";
 import {CardComponent, HeaderComponent} from "../../components";
 import {characters} from "../../api/characters";
 import {TypeCharacter} from "./interface/character.interface";
@@ -11,7 +11,6 @@ export const HomePage: React.FC <{}> = () => {
     const [Loading, setLoading] = useState<boolean>(true);
 
     const getCharacters = async () => {
-
         try {
             setLoading(true)
             const allCharacters = await characters.getAll({page});
